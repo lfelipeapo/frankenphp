@@ -1,0 +1,32 @@
+version: '3.1'
+
+services:
+
+  wordpress:
+    build: .
+    restart: always
+    ports:
+      - 82:80
+      - 444:443
+    environment:
+      WORDPRESS_DB_HOST: db  # Mudado de 'wp' para 'db' que é o nome do serviço do banco de dados
+      WORDPRESS_DB_USER: lfelipeapo
+      WORDPRESS_DB_PASSWORD: L£57w80Uli4n
+      WORDPRESS_DB_NAME: teste
+    volumes:
+      - wordpress:/var/www/html
+
+  db:
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_DATABASE: teste
+      MYSQL_USER: lfelipeapo
+      MYSQL_PASSWORD: L£57w80Uli4n
+      # MYSQL_RANDOM_ROOT_PASSWORD: '1'
+    volumes:
+      - db:/var/lib/mysql
+
+volumes:
+  wordpress:
+  db:
